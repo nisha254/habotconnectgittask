@@ -1,8 +1,5 @@
-// lib/core/constants/app_colors.dart
 import 'package:flutter/material.dart';
 
-/// Central color tokens for DigiVir app.
-/// All UI components reference these — no ad-hoc color values anywhere.
 class AppColors {
   AppColors._();
 

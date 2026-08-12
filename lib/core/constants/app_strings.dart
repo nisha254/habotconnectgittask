@@ -1,7 +1,4 @@
-// lib/core/constants/app_strings.dart
 
-/// All user-facing string constants.
-/// Avoids magic strings scattered across the codebase.
 class AppStrings {
   AppStrings._();
 

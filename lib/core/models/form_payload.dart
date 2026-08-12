@@ -1,8 +1,5 @@
-// lib/core/models/form_payload.dart
 import 'dart:convert';
 
-/// Dart model for the LSA Profile Verification form payload.
-/// All fields nullable so Fail-Closed security can detect missing values.
 class FormPayload {
   final String? fullName;
   final String? email;

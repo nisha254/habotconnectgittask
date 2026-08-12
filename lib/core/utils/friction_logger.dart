@@ -1,4 +1,3 @@
-// lib/core/utils/friction_logger.dart
 import 'dart:async';
 
 /// Status of the friction tracking state machine.

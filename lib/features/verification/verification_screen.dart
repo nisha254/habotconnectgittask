@@ -246,6 +246,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                           onSubmit: _handleSubmit,
                           onRetry: _controller.retryFromError,
                           onClear: _handleClear,
+                          onTestMissingLineage: _controller.testMissingLineageGate,
                         ),
 
                         const SizedBox(height: 24),

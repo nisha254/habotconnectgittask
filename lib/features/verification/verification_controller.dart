@@ -2,6 +2,7 @@
 import 'package:flutter/foundation.dart';
 import '../../core/models/form_payload.dart';
 import '../../core/utils/friction_logger.dart';
+import '../../core/utils/metadata_helper.dart';
 import '../../core/utils/validators.dart';
 import '../../services/api_service.dart';
 
@@ -136,7 +137,7 @@ class VerificationController extends ChangeNotifier {
   Future<void> submit() async {
     // ── Step 1: Run per-field validation lineage ─────────────────────────────
     _setState(VerificationState.validating, 'Validating form data...');
-    await Future.delayed(const Duration(milliseconds: 500));
+    await Future.delayed(const Duration(milliseconds: 400));
 
     // Compute and expose per-field results for the lineage indicator.
     _nameValid = Validators.fullName(fullName) == null;
@@ -145,7 +146,7 @@ class VerificationController extends ChangeNotifier {
     _categoryValid = Validators.profileCategory(profileCategory) == null;
     notifyListeners();
 
-    await Future.delayed(const Duration(milliseconds: 400));
+    await Future.delayed(const Duration(milliseconds: 300));
 
     final payload = FormPayload(
       fullName: fullName,
@@ -175,6 +176,12 @@ class VerificationController extends ChangeNotifier {
     }
   }
 
+  /// Triggers Gate 2 (Missing / Invalid Predecessor Lineage) for testing & demo.
+  Future<void> testMissingLineageGate() async {
+    MetadataHelper.forceInvalidPredecessorForDemo = true;
+    await submit();
+  }
+
   // ── Reset ─────────────────────────────────────────────────────────────────────
   void reset() {
     fullName = null;
@@ -195,10 +202,16 @@ class VerificationController extends ChangeNotifier {
     _frictionStatus = FrictionStatus.idle;
     _latestFrictionEvent = null;
     _frictionLogger.stopTracking();
+    MetadataHelper.forceInvalidPredecessorForDemo = false;
+    // NOTE: MetadataHelper.resetChain() intentionally NOT called here.
+    // The predecessor_id lineage chain is a session-level concern and must
+    // persist across form clears so that 2nd, 3rd submissions correctly
+    // show SHA-256(prevTraceId) instead of always showing "null".
     _setState(VerificationState.idle, '');
   }
 
   void retryFromError() {
+    MetadataHelper.forceInvalidPredecessorForDemo = false;
     _setState(VerificationState.idle, '');
   }
 

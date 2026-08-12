@@ -1,4 +1,3 @@
-// lib/features/verification/widgets/form_field_tile.dart
 import 'package:flutter/material.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/utils/friction_logger.dart';
@@ -97,7 +96,7 @@ class FormFieldTile extends StatelessWidget {
                       : isResumed
                           ? _FrictionBadge(
                               key: const ValueKey('f_resumed'),
-                              label: '▶️ Typing Resumed',
+                              label: 'Typing Resumed',
                               color: AppColors.success,
                               bgColor: AppColors.successLight,
                               borderColor: AppColors.success.withValues(alpha: 0.4),
@@ -105,7 +104,7 @@ class FormFieldTile extends StatelessWidget {
                           : isTracking
                               ? _FrictionBadge(
                                   key: const ValueKey('f_tracking'),
-                                  label: '⏱️ Friction Monitor Active (5s)',
+                                  label: 'Friction Monitor Active (5s)',
                                   color: AppColors.primary,
                                   bgColor: AppColors.primaryLight,
                                   borderColor: AppColors.primary.withValues(alpha: 0.4),

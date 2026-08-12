@@ -1,4 +1,3 @@
-// lib/features/verification/widgets/profile_header.dart
 import 'package:flutter/material.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_strings.dart';

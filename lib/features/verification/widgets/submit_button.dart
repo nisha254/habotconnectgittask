@@ -11,6 +11,7 @@ class SubmitButton extends StatelessWidget {
   final VoidCallback? onSubmit;
   final VoidCallback? onRetry;
   final VoidCallback? onClear;
+  final VoidCallback? onTestMissingLineage;
 
   const SubmitButton({
     super.key,
@@ -18,6 +19,7 @@ class SubmitButton extends StatelessWidget {
     this.onSubmit,
     this.onRetry,
     this.onClear,
+    this.onTestMissingLineage,
   });
 
   @override
@@ -139,6 +141,35 @@ class SubmitButton extends StatelessWidget {
             ),
           ),
         ),
+
+        // Demo Helper: Test Gate 2 (Missing Lineage) button
+        if (state == VerificationState.idle && onTestMissingLineage != null) ...[
+          const SizedBox(height: 10),
+          SizedBox(
+            width: double.infinity,
+            height: 44,
+            child: OutlinedButton.icon(
+              onPressed: onTestMissingLineage,
+              icon: const Icon(Icons.shield_outlined, size: 16, color: AppColors.error),
+              label: const Text(
+                ' Test Gate 2 (Simulate Missing Lineage)',
+                style: TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.error,
+                ),
+              ),
+              style: OutlinedButton.styleFrom(
+                side: BorderSide(color: AppColors.error.withValues(alpha: 0.35)),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                backgroundColor: AppColors.errorLight.withValues(alpha: 0.5),
+              ),
+            ),
+          ),
+        ],
+
         // Clear form secondary button
         if (state != VerificationState.idle) ...[
           const SizedBox(height: 12),
